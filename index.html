@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'" />
+  <title>Mi Browser</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; font-family: system-ui, sans-serif; background: #1e1f24; color: #e8e8e8; }
+    body { display: flex; flex-direction: column; }
+
+    #tabs { display: flex; align-items: center; background: #14151a; padding: 6px 6px 0; gap: 4px; overflow-x: auto; }
+    .tab { display: flex; align-items: center; gap: 8px; max-width: 200px; min-width: 100px; padding: 8px 10px;
+           background: #25262d; border-radius: 8px 8px 0 0; cursor: pointer; font-size: 13px; }
+    .tab.active { background: #33343d; }
+    .tab span.title { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .tab button { background: none; border: none; color: inherit; cursor: pointer; font-size: 14px; padding: 0 2px; }
+    #new-tab { background: none; border: none; color: #e8e8e8; font-size: 20px; cursor: pointer; padding: 0 10px; }
+
+    #toolbar { display: flex; gap: 6px; padding: 6px; background: #33343d; }
+    #toolbar button { background: #25262d; border: none; color: #e8e8e8; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 15px; }
+    #toolbar button:hover { background: #3d3e48; }
+    #url { flex: 1; background: #14151a; border: 1px solid #44454f; border-radius: 16px; color: #e8e8e8; padding: 6px 14px; font-size: 14px; outline: none; }
+    #url:focus { border-color: #6c8cff; }
+
+    #views { flex: 1; position: relative; }
+    webview { position: absolute; inset: 0; width: 100%; height: 100%; display: none; }
+    webview.active { display: flex; }
+  </style>
+</head>
+<body>
+  <div id="tabs"><button id="new-tab" title="Nueva pestaña (Ctrl+T)">+</button></div>
+  <div id="toolbar">
+    <button id="back" title="Atrás">←</button>
+    <button id="forward" title="Adelante">→</button>
+    <button id="reload" title="Recargar">⟳</button>
+    <input id="url" type="text" placeholder="Buscá o escribí una dirección" spellcheck="false" />
+  </div>
+  <div id="views"></div>
+  <script src="renderer.js"></script>
+</body>
+</html>
